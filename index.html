@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>realtest02 - Elite Frontend Portfolio</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom CSS for Google Fonts and general body styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            @apply text-gray-800;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            @apply font-bold;
+        }
+
+        /* Custom scroll animation styles */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition-delay: var(--animation-delay, 0s);
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom background patterns/styles if needed (using Tailwind for most) */
+        .glassmorphism-card {
+            background: rgba(255, 255, 255, 0.15); /* Slightly visible white */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #fde047; /* yellow-300 */
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #facc15; /* yellow-400 */
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-yellow-50 via-white to-blue-50">
+
+    <!-- Navbar -->
+    <header class="bg-white/80 backdrop-blur-md fixed w-full z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-3xl font-extrabold text-blue-700 hover:text-yellow-500 transition-colors duration-300">realtest02</a>
+            
+            <!-- Mobile Menu Toggle -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-blue-700 hover:text-yellow-500 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-8 text-lg">
+                <li><a href="#about" class="nav-link text-blue-600 hover:text-yellow-500 transition-colors duration-300 relative group">About
+                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </a></li>
+                <li><a href="#services" class="nav-link text-blue-600 hover:text-yellow-500 transition-colors duration-300 relative group">Services
+                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </a></li>
+                <li><a href="#portfolio" class="nav-link text-blue-600 hover:text-yellow-500 transition-colors duration-300 relative group">Portfolio
+                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </a></li>
+                <li><a href="#testimonials" class="nav-link text-blue-600 hover:text-yellow-500 transition-colors duration-300 relative group">Testimonials
+                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </a></li>
+                <li><a href="#contact" class="nav-link text-blue-600 hover:text-yellow-500 transition-colors duration-300 relative group">Contact
+                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </a></li>
+            </ul>
+        </nav>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-sm shadow-lg py-4">
+            <ul class="flex flex-col items-center space-y-4 text-lg">
+                <li><a href="#about" class="mobile-nav-link block text-blue-600 hover:text-yellow-500 transition-colors duration-300 py-2">About</a></li>
+                <li><a href="#services" class="mobile-nav-link block text-blue-600 hover:text-yellow-500 transition-colors duration-300 py-2">Services</a></li>
+                <li><a href="#portfolio" class="mobile-nav-link block text-blue-600 hover:text-yellow-500 transition-colors duration-300 py-2">Portfolio</a></li>
+                <li><a href="#testimonials" class="mobile-nav-link block text-blue-600 hover:text-yellow-500 transition-colors duration-300 py-2">Testimonials</a></li>
+                <li><a href="#contact" class="mobile-nav-link block text-blue-600 hover:text-yellow-500 transition-colors duration-300 py-2">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative h-screen flex items-center justify-center text-white overflow-hidden pt-16">
+            <img src="https://source.unsplash.com/random/1920x1080?abstract,tech,ui-ux,digital,yellow,blue" alt="Hero Background" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+            <div class="relative z-10 text-center px-6">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight animate-on-scroll" style="--animation-delay: 0s;">
+                    Crafting <span class="text-yellow-400">Award-Winning</span> Digital Experiences
+                </h1>
+                <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto animate-on-scroll" style="--animation-delay: 0.2s;">
+                    I blend cutting-edge frontend engineering with intuitive UI/UX design to build web solutions that captivate and convert.
+                </p>
+                <div class="mt-8 space-x-4 animate-on-scroll" style="--animation-delay: 0.4s;">
+                    <a href="#portfolio" class="inline-block bg-yellow-500 text-blue-900 font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-yellow-400 hover:scale-105 transition duration-300 ease-in-out">
+                        View My Work <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#contact" class="inline-block bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-white hover:text-blue-900 hover:scale-105 transition duration-300 ease-in-out">
+                        Let's Talk <i class="fas fa-envelope ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 md:py-24 bg-white">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <h2 class="text-4xl md:text-5xl text-center text-blue-700 mb-12 animate-on-scroll" style="--animation-delay: 0s;">About Me</h2>
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2 animate-on-scroll" style="--animation-delay: 0.2s;">
+                        <img src="https://source.unsplash.com/random/500x500?professional,developer,person,light" alt="Profile Picture" class="rounded-3xl shadow-2xl w-full h-auto object-cover transform rotate-3 hover:rotate-0 transition-transform duration-500 ease-in-out">
+                    </div>
+                    <div class="md:w-1/2 text-center md:text-left animate-on-scroll" style="--animation-delay: 0.4s;">
+                        <h3 class="text-3xl text-yellow-500 mb-4">I'm realtest02, a Full-Stack Creative.</h3>
+                        <p class="text-lg leading-relaxed mb-6">
+                            With over a decade of experience in the digital realm, I specialize in bringing complex ideas to life through elegant code and thoughtful design. My passion lies in creating interfaces that are not only beautiful but also incredibly functional and user-friendly.
+                        </p>
+                        <p class="text-lg leading-relaxed mb-6">
+                            From concept to deployment, I meticulously craft every pixel and line of code, ensuring a seamless and engaging experience. I thrive on challenging projects that demand innovation and a keen eye for detail, always pushing the boundaries of what's possible on the web.
+                        </p>
+                        <a href="#contact" class="inline-block bg-blue-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-blue-600 hover:scale-105 transition duration-300 ease-in-out">
+                            Get In Touch <i class="fas fa-paper-plane ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 md:py-24 bg-blue-800 text-white">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <h2 class="text-4xl md:text-5xl text-center text-yellow-400 mb-12 animate-on-scroll" style="--animation-delay: 0s;">My Expertise</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Service 1 -->
+                    <div class="bg-blue-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 0.2s;">
+                        <div class="text-5xl text-yellow-400 mb-6"><i class="fas fa-drafting-compass"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">UI/UX Design</h3>
+                        <p class="text-gray-200 leading-relaxed">Crafting intuitive and engaging user interfaces that delight users and drive conversions. From wireframes to pixel-perfect mockups.</p>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="bg-blue-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 0.4s;">
+                        <div class="text-5xl text-yellow-400 mb-6"><i class="fas fa-code"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">Frontend Development</h3>
+                        <p class="text-gray-200 leading-relaxed">Building robust, responsive, and high-performance web applications using modern frameworks like React, Vue, and cutting-edge CSS.</p>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="bg-blue-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 0.6s;">
+                        <div class="text-5xl text-yellow-400 mb-6"><i class="fas fa-server"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">Backend Integration</h3>
+                        <p class="text-gray-200 leading-relaxed">Seamlessly integrating frontend with powerful backend APIs and databases to create full-stack solutions and dynamic user experiences.</p>
+                    </div>
+                    <!-- Service 4 -->
+                    <div class="bg-blue-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 0.8s;">
+                        <div class="text-5xl text-yellow-400 mb-6"><i class="fas fa-mobile-alt"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">Responsive Design</h3>
+                        <p class="text-gray-200 leading-relaxed">Ensuring your website looks and performs flawlessly across all devices, from desktops to mobile phones, with a mobile-first approach.</p>
+                    </div>
+                    <!-- Service 5 -->
+                    <div class="bg-blue-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 1s;">
+                        <div class="text-5xl text-yellow-400 mb-6"><i class="fas fa-lightbulb"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">Innovation & Strategy</h3>
+                        <p class="text-gray-200 leading-relaxed">Providing strategic insights and innovative solutions to elevate your digital presence and achieve your business objectives.</p>
+                    </div>
+                    <!-- Service 6 -->
+                    <div class="bg-blue-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 1.2s;">
+                        <div class="text-5xl text-yellow-400 mb-6"><i class="fas fa-rocket"></i></div>
+                        <h3 class="text-2xl font-bold mb-3">Performance Optimization</h3>
+                        <p class="text-gray-200 leading-relaxed">Optimizing websites for speed and efficiency, ensuring fast loading times and smooth user interactions for better engagement.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 md:py-24 bg-gradient-to-br from-white to-yellow-50">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <h2 class="text-4xl md:text-5xl text-center text-blue-700 mb-12 animate-on-scroll" style="--animation-delay: 0s;">My Latest Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Project 1 -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden glassmorphism-card hover:shadow-2xl hover:scale-105 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 0.2s;">
+                        <img src="https://source.unsplash.com/random/600x400?web-design,portfolio,dashboard" alt="Project 1" class="w-full h-56 object-cover border-b-2 border-yellow-400">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-2">Creative Agency Website</h3>
+                            <p class="text-gray-600 mb-4">A sleek and modern website for a digital agency, focusing on compelling visuals and user-friendly navigation.</p>
+                            <a href="#" class="text-yellow-500 hover:text-blue-700 font-semibold transition-colors duration-300">View Project <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden glassmorphism-card hover:shadow-2xl hover:scale-105 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 0.4s;">
+                        <img src="https://source.unsplash.com/random/600x400?ecommerce,mobile-app,ui" alt="Project 2" class="w-full h-56 object-cover border-b-2 border-yellow-400">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-2">E-commerce Mobile App</h3>
+                            <p class="text-gray-600 mb-4">Designed and developed a seamless mobile shopping experience with intuitive product discovery and checkout flows.</p>
+                            <a href="#" class="text-yellow-500 hover:text-blue-700 font-semibold transition-colors duration-300">View Project <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden glassmorphism-card hover:shadow-2xl hover:scale-105 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 0.6s;">
+                        <img src="https://source.unsplash.com/random/600x400?saas,webapp,analytics" alt="Project 3" class="w-full h-56 object-cover border-b-2 border-yellow-400">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-2">SaaS Analytics Dashboard</h3>
+                            <p class="text-gray-600 mb-4">A powerful and customizable dashboard for data visualization, providing users with clear, actionable insights.</p>
+                            <a href="#" class="text-yellow-500 hover:text-blue-700 font-semibold transition-colors duration-300">View Project <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- Project 4 -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden glassmorphism-card hover:shadow-2xl hover:scale-105 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 0.8s;">
+                        <img src="https://source.unsplash.com/random/600x400?branding,landing-page,marketing" alt="Project 4" class="w-full h-56 object-cover border-b-2 border-yellow-400">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-2">Brand Launch Landing Page</h3>
+                            <p class="text-gray-600 mb-4">High-impact landing page designed to generate leads and build excitement for a new product launch.</p>
+                            <a href="#" class="text-yellow-500 hover:text-blue-700 font-semibold transition-colors duration-300">View Project <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- Project 5 -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden glassmorphism-card hover:shadow-2xl hover:scale-105 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 1s;">
+                        <img src="https://source.unsplash.com/random/600x400?blog,magazine,content" alt="Project 5" class="w-full h-56 object-cover border-b-2 border-yellow-400">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-2">Modern Blog Platform</h3>
+                            <p class="text-gray-600 mb-4">A content-focused blog with elegant typography and a responsive layout for optimal readability.</p>
+                            <a href="#" class="text-yellow-500 hover:text-blue-700 font-semibold transition-colors duration-300">View Project <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- Project 6 -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden glassmorphism-card hover:shadow-2xl hover:scale-105 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 1.2s;">
+                        <img src="https://source.unsplash.com/random/600x400?education,lms,elearning" alt="Project 6" class="w-full h-56 object-cover border-b-2 border-yellow-400">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-blue-700 mb-2">E-Learning Platform UI</h3>
+                            <p class="text-gray-600 mb-4">Designed the user interface for an engaging e-learning platform, making online education accessible and enjoyable.</p>
+                            <a href="#" class="text-yellow-500 hover:text-blue-700 font-semibold transition-colors duration-300">View Project <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 md:py-24 bg-yellow-400 text-blue-900">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <h2 class="text-4xl md:text-5xl text-center text-blue-900 mb-12 animate-on-scroll" style="--animation-delay: 0s;">What Clients Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 0.2s;">
+                        <div class="flex items-center mb-4">
+                            <img src="https://source.unsplash.com/random/100x100?person,ceo,female" alt="Client 1" class="w-16 h-16 rounded-full object-cover mr-4 border-2 border-yellow-500">
+                            <div>
+                                <p class="font-bold text-blue-800 text-lg">Jane Doe</p>
+                                <p class="text-gray-600">CEO, Tech Innovators</p>
+                            </div>
+                        </div>
+                        <p class="italic text-gray-700 leading-relaxed">"realtest02 transformed our vision into a stunning reality. Their attention to detail and creative solutions are unmatched. A truly exceptional frontend engineer!"</p>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 0.4s;">
+                        <div class="flex items-center mb-4">
+                            <img src="https://source.unsplash.com/random/100x100?person,founder,male" alt="Client 2" class="w-16 h-16 rounded-full object-cover mr-4 border-2 border-yellow-500">
+                            <div>
+                                <p class="font-bold text-blue-800 text-lg">John Smith</p>
+                                <p class="text-gray-600">Founder, Global Ventures</p>
+                            </div>
+                        </div>
+                        <p class="italic text-gray-700 leading-relaxed">"Working with realtest02 was a game-changer. Their UI/UX expertise made our application incredibly user-friendly and aesthetically pleasing. Highly recommend!"</p>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out animate-on-scroll" style="--animation-delay: 0.6s;">
+                        <div class="flex items-center mb-4">
+                            <img src="https://source.unsplash.com/random/100x100?person,manager,female,creative" alt="Client 3" class="w-16 h-16 rounded-full object-cover mr-4 border-2 border-yellow-500">
+                            <div>
+                                <p class="font-bold text-blue-800 text-lg">Emily White</p>
+                                <p class="text-gray-600">Marketing Director, BrandWave</p>
+                            </div>
+                        </div>
+                        <p class="italic text-gray-700 leading-relaxed">"The responsiveness and performance of our new website are outstanding. realtest02 delivered beyond our expectations with a truly award-winning design."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 md:py-24 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-4xl md:text-5xl text-center text-blue-700 mb-12 animate-on-scroll" style="--animation-delay: 0s;">Let's Create Together</h2>
+                <div class="bg-gradient-to-br from-yellow-50 via-white to-blue-50 p-8 md:p-12 rounded-2xl shadow-2xl border border-blue-100 animate-on-scroll" style="--animation-delay: 0.2s;">
+                    <p class="text-center text-lg text-gray-700 mb-8">
+                        Have a project in mind or just want to say hello? I'd love to hear from you!
+                    </p>
+                    <form action="#" method="POST" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-blue-700 text-sm font-semibold mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border-2 border-blue-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 outline-none transition duration-300" placeholder="Your Name" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-blue-700 text-sm font-semibold mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border-2 border-blue-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 outline-none transition duration-300" placeholder="your@email.com" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-blue-700 text-sm font-semibold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="6" class="w-full px-4 py-3 rounded-lg border-2 border-blue-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 outline-none transition duration-300" placeholder="Tell me about your project or query..." required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="bg-yellow-500 text-blue-900 font-semibold px-10 py-4 rounded-full shadow-lg hover:bg-yellow-400 hover:scale-105 transition duration-300 ease-in-out">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="mt-12 text-center animate-on-scroll" style="--animation-delay: 0.4s;">
+                        <h3 class="text-2xl text-blue-700 mb-4">Connect with me</h3>
+                        <div class="flex justify-center space-x-6">
+                            <a href="https://linkedin.com" target="_blank" class="text-blue-700 hover:text-yellow-500 text-3xl transition-colors duration-300"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://github.com" target="_blank" class="text-blue-700 hover:text-yellow-500 text-3xl transition-colors duration-300"><i class="fab fa-github"></i></a>
+                            <a href="https://twitter.com" target="_blank" class="text-blue-700 hover:text-yellow-500 text-3xl transition-colors duration-300"><i class="fab fa-twitter"></i></a>
+                            <a href="mailto:hello@realtest02.com" class="text-blue-700 hover:text-yellow-500 text-3xl transition-colors duration-300"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-gray-300 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-6">
+                <a href="#hero" class="text-4xl font-extrabold text-yellow-400 hover:text-white transition-colors duration-300">realtest02</a>
+            </div>
+            <p class="mb-4 text-lg">Crafting digital masterpieces, one pixel at a time.</p>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="https://linkedin.com" target="_blank" class="text-gray-400 hover:text-white text-2xl transition-colors duration-300"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com" target="_blank" class="text-gray-400 hover:text-white text-2xl transition-colors duration-300"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com" target="_blank" class="text-gray-400 hover:text-white text-2xl transition-colors duration-300"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p class="text-sm">&copy; 2023 realtest02. All rights reserved. Designed and developed with <i class="fas fa-heart text-red-500"></i> by realtest02.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu and Scroll Animations -->
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Scroll Animation with IntersectionObserver
+        const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, {
+            threshold: 0.1, // Trigger when 10% of the element is visible
+            rootMargin: "0px 0px -50px 0px" // Adjusts when the intersection occurs (e.g., 50px before end of viewport)
+        });
+
+        animateOnScrollElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth scroll for internal links (optional, browser handles it with scroll-smooth class)
+        // document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        //     anchor.addEventListener('click', function (e) {
+        //         e.preventDefault();
+        //         document.querySelector(this.getAttribute('href')).scrollIntoView({
+        //             behavior: 'smooth'
+        //         });
+        //     });
+        // });
+    </script>
+</body>
+</html>
